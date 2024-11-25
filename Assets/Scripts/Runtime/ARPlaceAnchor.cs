@@ -84,8 +84,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             if (m_RaycastHitEvent != null)
                 m_RaycastHitEvent.eventRaised -= CreateAnchor;
 
-            if (m_AnchorManager != null)
-                m_AnchorManager.trackablesChanged.AddListener(OnAnchorsChanged);
+            m_AnchorManager?.trackablesChanged.AddListener(OnAnchorsChanged);
         }
 
         /// <summary>
@@ -122,8 +121,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 var anchor = result.value;
                 var arAnchorDebugVisualizer = anchor.GetComponent<ARAnchorDebugVisualizer>();
-                if (arAnchorDebugVisualizer != null)
-                    arAnchorDebugVisualizer.SetAnchorCreationMethod(true, hit.hitType);
+                arAnchorDebugVisualizer?.SetAnchorCreationMethod(true, hit.hitType);
             }
         }
     }
