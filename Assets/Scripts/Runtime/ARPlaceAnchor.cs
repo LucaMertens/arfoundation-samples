@@ -16,6 +16,16 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         Dictionary<TrackableId, ARAnchor> m_AnchorsByTrackableId = new();
 
+
+        // Prefab to instantiate a line from the anchor to the path point
+        [SerializeField]
+        private GameObject linePrefab;
+
+        // Prefab to instantiate above the last anchor
+        [SerializeField]
+        private GameObject pathPointPrefab;
+
+
         public ARAnchorManager anchorManager
         {
             get => m_AnchorManager;
@@ -39,6 +49,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         void OnEnable()
         {
+
             if (m_AnchorManager == null)
                 m_AnchorManager = FindAnyObjectByType<ARAnchorManager>();
 
@@ -122,6 +133,20 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 var anchor = result.value;
                 var arAnchorDebugVisualizer = anchor.GetComponent<ARAnchorDebugVisualizer>();
                 arAnchorDebugVisualizer?.SetAnchorCreationMethod(true, hit.hitType);
+
+
+                // Instantiate a new path point above the anchor, using the coordinate system of the anchor
+                var pathPoint = Instantiate(pathPointPrefab, anchor.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+                pathPoint.transform.parent = anchor.transform;
+
+                // Draw a new line from the anchor point to the path point
+                var line = Instantiate(linePrefab, anchor.transform.position, Quaternion.identity);
+                line.transform.SetParent(anchor.transform); // Set the anchor as the parent of the line
+                var lineRenderer = line.GetComponent<LineRenderer>();
+                lineRenderer.positionCount = 2;
+                lineRenderer.SetPosition(0, Vector3.zero); // Start point relative to the anchor
+                lineRenderer.SetPosition(1, pathPoint.transform.localPosition); // End point relative to the anchor
+                lineRenderer.useWorldSpace = false; // Use local space for the line
             }
         }
     }

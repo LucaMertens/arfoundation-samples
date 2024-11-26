@@ -47,10 +47,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Camera/CpuImages/CpuImages.unity
     guid: e769916924fd3814ab1d9474de816b22
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Occlusion/DepthImages/DepthImages.unity
     guid: ed5207d50697d40d688249cd6c59608b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Occlusion/SimpleOcclusion/SimpleOcclusion.unity
     guid: 50a69364b393d4ce8a8b3589422b67b7
   - enabled: 0
@@ -86,10 +86,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BodyTracking/HumanBodyTracking3D/HumanBodyTracking3D.unity
     guid: 9fc1f5ed98d414310a8b9e659c295d7c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ImageTracking/BasicImageTracking/BasicImageTracking.unity
     guid: e0b018a3c3b5cfd4c8e316706ec0a18c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ImageTracking/ImageTrackingWithMultiplePrefabs/ImageTrackingWithMultiplePrefabs.unity
     guid: a1bf0e7b9cece455f81c1d2731ba76e7
   - enabled: 0
@@ -98,10 +98,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Camera/LightEstimation/HDRLightEstimation.unity
     guid: 9d96daba3bd254cfebe94efd2d61b2c3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Meshing/ClassificationMeshes/ClassificationMeshes.unity
     guid: edd18841a7a8f4a68a80239a5e7f14f9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Meshing/NormalMeshes/NormalMeshes.unity
     guid: b8abb254c2f424d54921b442ad2f9f2e
   - enabled: 0
@@ -110,25 +110,25 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ObjectTracking/ObjectTracking.unity
     guid: 8f797cefb98fe43109524cbbcc8faafc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlaneDetection/TogglePlaneDetection/TogglePlaneDetection.unity
     guid: eb4bbb3a5e81acc41a903b1c5f1c827b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlaneDetection/PlaneMasking/PlaneMasking.unity
     guid: 82d84156010e4481498cad3bf12744bd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlaneDetection/PlaneDetectionMode/PlaneDetectionMode.unity
     guid: c9de49d98546b4b769099449d82806db
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PointClouds/AllPointCloudPoints.unity
     guid: a84b70115cd154cf59b84651a828ac60
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SimpleAR/SimpleAR.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ARCore/ARCoreSessionRecording.unity
     guid: 5950f406e5177479b89e0c8d9160b0a9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DebugMenu/DebugMenu.unity
     guid: 15456b85ccc6645c8825f7a70ae23ff1
   - enabled: 0

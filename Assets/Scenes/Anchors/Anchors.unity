@@ -1264,6 +1264,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AnchorManager: {fileID: 244670058}
   m_RaycastHitEvent: {fileID: 11400000, guid: 6ddaf6abbb6e3f6489a5badc62d646ef, type: 2}
+  linePrefab: {fileID: 5327269479707875799, guid: cafb3556ccf5fb24b9d3d77c1f4bd7ce,
+    type: 3}
+  pathPointPrefab: {fileID: 8429659432486913138, guid: 9caac07c38ad1544a97229b724675710,
+    type: 3}
 --- !u!114 &524982239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,7 +1504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &778586817
 LineRenderer:
   serializedVersion: 2
@@ -1622,7 +1626,7 @@ Transform:
   m_GameObject: {fileID: 778586816}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9195962, y: 1.705891, z: -6.151212}
+  m_LocalPosition: {x: -2.41, y: 1.705891, z: -6.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
