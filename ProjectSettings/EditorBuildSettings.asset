@@ -47,10 +47,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Camera/CpuImages/CpuImages.unity
     guid: e769916924fd3814ab1d9474de816b22
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Occlusion/DepthImages/DepthImages.unity
     guid: ed5207d50697d40d688249cd6c59608b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Occlusion/SimpleOcclusion/SimpleOcclusion.unity
     guid: 50a69364b393d4ce8a8b3589422b67b7
   - enabled: 0
@@ -104,7 +104,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Meshing/NormalMeshes/NormalMeshes.unity
     guid: b8abb254c2f424d54921b442ad2f9f2e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Meshing/OcclusionMeshes/OcclusionMeshes.unity
     guid: adcdbf89e115e4a489bd500be88c1459
   - enabled: 0
