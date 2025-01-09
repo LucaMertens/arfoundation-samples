@@ -15,29 +15,22 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [Tooltip("The Scriptable Object Asset that contains the ARRaycastHit event.")]
         ARRaycastHitEventAsset m_RaycastHitEvent;
 
+        [SerializeField]
+        PathHandler pathHandler;
+
         Dictionary<TrackableId, ARAnchor> m_AnchorsByTrackableId = new();
 
 
-        // Prefab to instantiate a line from the anchor to the path point
-        [SerializeField]
-        private GameObject linePrefab;
-
-        // Prefab to instantiate above the last anchor
-        [SerializeField]
-        private GameObject pathPointPrefab;
-
-        // The path line renderer
-        [SerializeField]
-        private LineRenderer pathLineRenderer;
+        // // Prefab to instantiate above the last anchor
+        // [SerializeField]
+        // private GameObject pathPointPrefab;
 
 
-        // The currently selected reference plane
-        private ARPlane selectedPlane;
+        // // The currently selected reference plane
+        // private ARPlane selectedPlane;
 
         // The currently selected anchors
         private List<ARAnchor> selectedAnchors = new List<ARAnchor>();
-
-
 
 
         public ARAnchorManager anchorManager
@@ -48,11 +41,13 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public void RemoveAllAnchors()
         {
+            Debug.Log("Removing all anchors");
             foreach (var anchor in m_AnchorsByTrackableId.Values)
             {
                 m_AnchorManager.TryRemoveAnchor(anchor);
             }
             m_AnchorsByTrackableId.Clear();
+            pathHandler.destroyPath();
         }
 
         // Runs when the reset option is called in the context menu in-editor, or when first created.
@@ -110,68 +105,24 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_RaycastHitEvent.eventRaised -= CreateAnchor;
 
             if (m_AnchorManager != null)
-                m_AnchorManager.trackablesChanged.AddListener(OnAnchorsChanged);
+                m_AnchorManager.trackablesChanged.RemoveListener(OnAnchorsChanged);
         }
 
-        void selectPlane(ARPlane plane)
-        {
-            selectedPlane = plane;
-            HandlePathOriginUpdate();
-        }
+        // void selectPlane(ARPlane plane)
+        // {
+        //     selectedPlane = plane;
+        // }
 
         void selectAnchor(ARAnchor anchor)
         {
             if (selectedAnchors.Count >= 2)
             {
                 selectedAnchors.Clear();
+                pathHandler.destroyPath();
             }
 
             selectedAnchors.Add(anchor);
-            HandlePathOriginUpdate();
-        }
-
-
-
-
-        // Based on the orientation of the selected plane and the first n points of the path-line, render the path.
-        // The plane is just there for orientation in space.
-        // The path-line-renderer already contains points. The first n anchors are matched to the first n points of the path-line.
-        void HandlePathOriginUpdate()
-        {
-            if (/* selectedPlane == null || */ selectedAnchors.Count < 2)
-            {
-                return;
-            }
-
-
-            Vector3[] originalPoints = new Vector3[pathLineRenderer.positionCount];
-            pathLineRenderer.GetPositions(originalPoints);
-
-            Vector3 originalDirection = originalPoints[1] - originalPoints[0];
-            Vector3 targetDirection = selectedAnchors[1].transform.position - selectedAnchors[0].transform.position;
-
-            // Ensure we're using local space
-            pathLineRenderer.useWorldSpace = false;
-
-
-            // Calculate and apply scale
-            float scale = targetDirection.magnitude / originalDirection.magnitude;
-            pathLineRenderer.transform.localScale = new Vector3(scale, scale, scale);
-
-            // Calculate and apply rotation
-            Quaternion rotation = Quaternion.FromToRotation(originalDirection, targetDirection);
-            pathLineRenderer.transform.rotation = rotation;
-
-            // Set the origin of the coordinate system of the path line renderer to be the first anchor
-            pathLineRenderer.transform.position = selectedAnchors[0].pose.position - pathLineRenderer.transform.TransformPoint(originalPoints[0]);
-
-            // Assert that the world coordinates of the first point of the path line renderer are the same as the world coordinates of the first anchor
-            Debug.Assert(pathLineRenderer.transform.TransformPoint(originalPoints[0]) == selectedAnchors[0].transform.position
-                , "" + pathLineRenderer.transform.TransformPoint(originalPoints[0]) + " != " + selectedAnchors[0].transform.position);
-
-            // Set the path line renderer to be active
-            pathLineRenderer.gameObject.SetActive(true);
-            Debug.Log("Trying to update path");
+            pathHandler.UpdatePath(selectedAnchors);
         }
 
         /// <summary>
@@ -182,7 +133,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (m_AnchorManager.descriptor.supportsTrackableAttachments && hit.trackable is ARPlane plane)
             {
-                selectPlane(plane);
+                // selectPlane(plane);
                 AttachAnchorToTrackable(plane, hit);
             }
             else
@@ -202,21 +153,21 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        void CreateBaloon(ARAnchor anchor)
-        {
-            // Instantiate a new path point above the anchor, using the coordinate system of the anchor
-            var pathPoint = Instantiate(pathPointPrefab, anchor.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-            pathPoint.transform.parent = anchor.transform;
+        // void CreateBaloon(ARAnchor anchor)
+        // {
+        //     // Instantiate a new path point above the anchor, using the coordinate system of the anchor
+        //     var pathPoint = Instantiate(pathPointPrefab, anchor.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        //     pathPoint.transform.parent = anchor.transform;
 
-            // Draw a new line from the anchor point to the path point
-            var line = Instantiate(linePrefab, anchor.transform.position, Quaternion.identity);
-            line.transform.SetParent(anchor.transform); // Set the anchor as the parent of the line
-            var lineRenderer = line.GetComponent<LineRenderer>();
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0, Vector3.zero); // Start point relative to the anchor
-            lineRenderer.SetPosition(1, pathPoint.transform.localPosition); // End point relative to the anchor
-            lineRenderer.useWorldSpace = false; // Use local space for the line
-        }
+        //     // Draw a new line from the anchor point to the path point
+        //     var line = Instantiate(linePrefab, anchor.transform.position, Quaternion.identity);
+        //     line.transform.SetParent(anchor.transform); // Set the anchor as the parent of the line
+        //     var lineRenderer = line.GetComponent<LineRenderer>();
+        //     lineRenderer.positionCount = 2;
+        //     lineRenderer.SetPosition(0, Vector3.zero); // Start point relative to the anchor
+        //     lineRenderer.SetPosition(1, pathPoint.transform.localPosition); // End point relative to the anchor
+        //     lineRenderer.useWorldSpace = false; // Use local space for the line
+        // }
 
         async void CreateAnchorAsync(ARRaycastHit hit)
         {
@@ -228,7 +179,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 arAnchorDebugVisualizer?.SetAnchorCreationMethod(true, hit.hitType);
 
                 selectAnchor(anchor);
-                CreateBaloon(anchor);
+                // CreateBaloon(anchor);
 
             }
         }
