@@ -8,6 +8,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         [SerializeField] private Canvas moderatorCanvas;
         [SerializeField] private Canvas evaluationCanvas;
         [SerializeField] private ARPlaneManager planeManager;
+        [SerializeField] private ARPointCloudManager pointCloudManager;
 
         private bool inModeratorMode = true;
 
@@ -40,8 +41,19 @@ namespace UnityEngine.XR.ARFoundation.Samples
             moderatorCanvas.enabled = moderatorMode;
             evaluationCanvas.enabled = !moderatorMode;
 
+            // Remove all planes and feature points
+
+            foreach (var plane in planeManager.trackables)
+            {
+                plane.gameObject.SetActive(moderatorMode);
+            }
+
+
             // Disable plane and feature point visualization in eval mode
             planeManager.enabled = moderatorMode;
+            pointCloudManager.enabled = moderatorMode;
+
+
 
 
         }
