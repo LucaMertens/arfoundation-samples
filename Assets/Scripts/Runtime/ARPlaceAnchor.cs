@@ -16,7 +16,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
         ARRaycastHitEventAsset m_RaycastHitEvent;
 
         [SerializeField]
-        PathHandler pathHandler;
+        PathManager pathHandler;
 
         Dictionary<TrackableId, ARAnchor> m_AnchorsByTrackableId = new();
 
@@ -47,6 +47,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
                 m_AnchorManager.TryRemoveAnchor(anchor);
             }
             m_AnchorsByTrackableId.Clear();
+            selectedAnchors.Clear();
             pathHandler.destroyPath();
         }
 
@@ -117,8 +118,9 @@ namespace UnityEngine.XR.ARFoundation.Samples
         {
             if (selectedAnchors.Count >= 2)
             {
-                selectedAnchors.Clear();
-                pathHandler.destroyPath();
+                return;
+                // selectedAnchors.Clear();
+                // pathHandler.destroyPath();
             }
 
             selectedAnchors.Add(anchor);

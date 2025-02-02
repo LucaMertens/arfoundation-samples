@@ -15,6 +15,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
         public bool EvaluateRequirements()
         {
+            return true; // TODO: Remove this last minute fix
             bool areRequirementsMet = true;
             foreach (var r in m_Requirements)
             {

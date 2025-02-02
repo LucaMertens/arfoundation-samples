@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/Menu.unity
     guid: 904110ab8cef14f7d96c56ca20774e5a
+  - enabled: 1
+    path: Assets/Scenes/Anchors/Anchors.unity
+    guid: 5cba9114a192a46a7aef31da62316e39
   - enabled: 0
     path: Assets/Scenes/MetaMenu.unity
     guid: f4c0e17cbc9b3465dbcc74faf0ef6059
@@ -32,9 +35,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ARKit/ThermalState/ThermalState.unity
     guid: e5b0cb11dfe354e67a344c280bf8b611
-  - enabled: 1
-    path: Assets/Scenes/Anchors/Anchors.unity
-    guid: 5cba9114a192a46a7aef31da62316e39
   - enabled: 0
     path: Assets/Scenes/Camera/CameraGrain/CameraGrain.unity
     guid: 68237ded327024ec39c1317a214ad56f
@@ -47,10 +47,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Camera/CpuImages/CpuImages.unity
     guid: e769916924fd3814ab1d9474de816b22
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Occlusion/DepthImages/DepthImages.unity
     guid: ed5207d50697d40d688249cd6c59608b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Occlusion/SimpleOcclusion/SimpleOcclusion.unity
     guid: 50a69364b393d4ce8a8b3589422b67b7
   - enabled: 0
@@ -104,7 +104,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Meshing/NormalMeshes/NormalMeshes.unity
     guid: b8abb254c2f424d54921b442ad2f9f2e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Meshing/OcclusionMeshes/OcclusionMeshes.unity
     guid: adcdbf89e115e4a489bd500be88c1459
   - enabled: 0
